@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Insurance Card</title>
+    <title>Insurance Information</title>
     <style>
         * {
             margin: 0;
@@ -85,6 +85,10 @@
             font-size: 12px;
             color: #999;
         }
+        .agent-phone {
+            font-size: 16px;
+            font-weight: 600;
+        }
     </style>
 </head>
 <body>
@@ -94,7 +98,7 @@
         
         <div class="info-section">
             <div class="info-label">Name</div>
-            <div class="info-value">Massa [Your Last Name]</div>
+            <div class="info-value">MASSA</div>
         </div>
 
         <div class="info-section">
@@ -103,13 +107,18 @@
         </div>
 
         <div class="info-section">
-            <div class="info-label">Agent</div>
-            <div class="info-value">[Agent Name]</div>
+            <div class="info-label">Agent Name</div>
+            <div class="info-value">[AGENT NAME HERE]</div>
         </div>
 
         <div class="info-section">
-            <div class="info-label">Emergency Contact</div>
-            <div class="info-value">[Your Phone Number]</div>
+            <div class="info-label">Agent Phone</div>
+            <div class="info-value agent-phone">[AGENT PHONE HERE]</div>
+        </div>
+
+        <div class="info-section">
+            <div class="info-label">Your Emergency Contact</div>
+            <div class="info-value agent-phone">[YOUR PHONE NUMBER HERE]</div>
         </div>
 
         <div class="divider"></div>
@@ -120,11 +129,11 @@
         </div>
 
         <div class="emergency-note">
-            <strong>In an accident:</strong> Call your agent immediately. Policy details are in your Progressive mobile app.
+            <strong>In an accident:</strong> Call your agent or emergency contact immediately. Keep your policy number in your Progressive mobile app.
         </div>
 
         <div class="footer">
-            This is a backup reference. Keep policy # in your app.
+            This is a backup reference card. Always have your policy details on hand.
         </div>
     </div>
 </body>
