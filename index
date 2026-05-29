@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vehicle Docs — C. Massa</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --charcoal: #1e1e1e;
+            --charcoal-mid: #2a2a2a;
+            --charcoal-light: #363636;
+            --orange: #E8610A;
+            --orange-dim: rgba(232, 97, 10, 0.15);
+            --white: #f0ede8;
+            --muted: #888;
+            --subtle: #555;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background: var(--charcoal);
+            color: var(--white);
+            font-family: 'DM Sans', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 24px 16px 48px;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .top-bar {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            height: 3px;
+            background: var(--orange);
+            z-index: 10;
+        }
+
+        .card {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            max-width: 480px;
+            animation: rise 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+        }
+
+        @keyframes rise {
+            from { opacity: 0; transform: translateY(24px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .header {
+            margin-bottom: 32px;
+            padding-bottom: 24px;
+            border-bottom: 1px solid var(--charcoal-light);
+        }
+
+        .header-eyebrow {
+            font-family: 'DM Mono', monospace;
+            font-size: 10px;
+            letter-spacing: 0.2em;
+            color: var(--orange);
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .header-name {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 52px;
+            letter-spacing: 0.04em;
+            line-height: 1;
+            color: var(--white);
+        }
+
+        .header-name span { color: var(--orange); }
+
+        .header-sub {
+            font-size: 12px;
+            color: var(--muted);
+            margin-top: 6px;
+            font-weight: 300;
+            letter-spacing: 0.05em;
+        }
+
+        .vehicle-block {
+            background: var(--orange-dim);
+            border: 1px solid rgba(232, 97, 10, 0.3);
+            border-radius: 10px;
+            padding: 16px 20px;
+            margin-bottom: 28px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .vehicle-name {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 24px;
+            letter-spacing: 0.05em;
+            line-height: 1;
+        }
+
+        .vehicle-detail {
+            font-size: 11px;
+            color: var(--muted);
+            margin-top: 3px;
+            font-family: 'DM Mono', monospace;
+            letter-spacing: 0.08em;
+        }
+
+        .docs-label {
+            font-family: 'DM Mono', monospace;
+            font-size: 9px;
+            letter-spacing: 0.2em;
+            color: var(--orange);
+            text-transform: uppercase;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .docs-label::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--charcoal-light);
+        }
+
+        .doc-links {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .doc-link {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 18px 20px;
+            background: var(--charcoal-mid);
+            border: 1px solid var(--charcoal-light);
+            border-radius: 10px;
+            text-decoration: none;
+            color: var(--white);
+            transition: background 0.15s, border-color 0.15s, transform 0.15s;
+            animation: rise 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+        }
+
+        .doc-link:nth-child(1) { animation-delay: 0.1s; }
+        .doc-link:nth-child(2) { animation-delay: 0.18s; }
+        .doc-link:nth-child(3) { animation-delay: 0.26s; }
+
+        .doc-link:hover {
+            background: var(--orange-dim);
+            border-color: rgba(232, 97, 10, 0.35);
+            transform: translateX(3px);
+        }
+
+        .doc-link-label {
+            font-family: 'DM Mono', monospace;
+            font-size: 9px;
+            color: var(--muted);
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            margin-bottom: 4px;
+        }
+
+        .doc-link-title {
+            font-size: 17px;
+            font-weight: 500;
+            letter-spacing: 0.01em;
+        }
+
+        .doc-link-arrow {
+            color: var(--orange);
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+
+        .footer {
+            margin-top: 28px;
+            text-align: center;
+            font-family: 'DM Mono', monospace;
+            font-size: 9px;
+            color: var(--subtle);
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            line-height: 1.8;
+        }
+
+        .forge-mark { color: var(--orange); opacity: 0.6; }
+    </style>
+</head>
+<body>
+    <div class="top-bar"></div>
+    <div class="card">
+        <div class="header">
+            <div class="header-eyebrow">▶ Vehicle Documents</div>
+            <div class="header-name">C. <span>Massa</span></div>
+            <div class="header-sub">Select a document below</div>
+        </div>
+
+        <div class="vehicle-block">
+            <div style="font-size:28px;">🚗</div>
+            <div>
+                <div class="vehicle-name">2026 Subaru WRX</div>
+                <div class="vehicle-detail">World Rally Blue · RI 4G819</div>
+            </div>
+        </div>
+
+        <div class="docs-label">Documents</div>
+
+        <div class="doc-links">
+            <a href="./insurance/" class="doc-link">
+                <div>
+                    <div class="doc-link-label">Progressive Direct</div>
+                    <div class="doc-link-title">Insurance</div>
+                </div>
+                <div class="doc-link-arrow">→</div>
+            </a>
+            <a href="./registration/" class="doc-link">
+                <div>
+                    <div class="doc-link-label">State of Rhode Island</div>
+                    <div class="doc-link-title">Registration</div>
+                </div>
+                <div class="doc-link-arrow">→</div>
+            </a>
+            <a href="./license/" class="doc-link">
+                <div>
+                    <div class="doc-link-label">RI DMV</div>
+                    <div class="doc-link-title">Driver's License</div>
+                </div>
+                <div class="doc-link-arrow">→</div>
+            </a>
+        </div>
+
+        <div class="footer">
+            <div>Christopher Massa · Rhode Island</div>
+            <div style="margin-top:10px;" class="forge-mark">▶▶▶ The Forge · Backup Reference Only ▶▶▶</div>
+        </div>
+    </div>
+</body>
+</html>
